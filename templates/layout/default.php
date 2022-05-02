@@ -35,10 +35,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 <body>
     <section class="section">
+        <?= $this->Flash->render() ?>
         <div class="container">
-            <h1 class="title">
-                <?= $this->fetch('title') ?>
-            </h1>
             <?= $this->fetch('content') ?>
             <?= $this->Flash->render() ?>
         </div>

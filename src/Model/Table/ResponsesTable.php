@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -41,7 +42,6 @@ class ResponsesTable extends Table
     public function initialize(array $config): void
     {
         parent::initialize($config);
-
         $this->setTable('responses');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
@@ -56,7 +56,6 @@ class ResponsesTable extends Table
             'joinType' => 'INNER',
         ]);
     }
-
     /**
      * Default validation rules.
      *
@@ -66,14 +65,10 @@ class ResponsesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->scalar('option_id')
-            ->maxLength('option_id', 255)
-            ->requirePresence('option_id', 'create')
-            ->notEmptyString('option_id');
-
+            ->integer('id')
+            ->allowEmptyString('id', null, 'create');
         return $validator;
     }
-
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -83,8 +78,7 @@ class ResponsesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('option_id', 'Options'), ['errorField' => 'option_id']);
-
+        $rules->add($rules->existsIn(['option_id'], 'Options'), ['errorField' => 'option_id']);
         return $rules;
     }
 }
